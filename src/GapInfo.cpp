@@ -167,12 +167,11 @@ int GapInfo::processFile(const char* inputFileName, const char* outputFileName,
            (!SamFlag::isMateMapped(samFlags)) ||
            (!SamFlag::isPaired(samFlags)) ||
            (samFlags & SamFlag::SECONDARY_ALIGNMENT) || 
-           (samFlags & SamFlag::SUPPLEMENTARY_ALIGNMENT) || 
            (SamFlag::isDuplicate(samFlags)) ||
            (SamFlag::isQCFailure(samFlags)))
         {
             // unmapped, mate unmapped, not paired,
-            // not the primary alignment, supplementary alignment
+            // not the primary alignment,
             // duplicate, fails vendor quality check 
             continue;
         }
