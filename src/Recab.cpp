@@ -47,7 +47,7 @@ Recab::Recab()
       myDbsnpFile(""),
       myQField(""),
       myStoreQualTag(""),
-      myBuildExcludeFlags("0x0F04"),
+      myBuildExcludeFlags("0x0704"),
       myApplyExcludeFlags("0x0000"),
       myIntBuildExcludeFlags(0),
       myIntApplyExcludeFlags(0)
@@ -55,7 +55,6 @@ Recab::Recab()
     myMappedCount = 0;
     myUnMappedCount = 0;
     mySecondaryCount = 0;
-    mySupplementaryCount = 0;
     myDupCount = 0;
     myQCFailCount = 0;
     myMapQual0Count = 0;
@@ -157,7 +156,7 @@ void Recab::recabSpecificUsage()
     std::cerr << "\t                                (default is to get it from the Quality field)" << std::endl;
     std::cerr << "\t--storeQualTag <quality tag>  : tag to store the previous quality into" << std::endl;
     std::cerr << "\t--buildExcludeFlags <flag>    : exclude reads with any of these flags set when building the" << std::endl;
-    std::cerr << "\t                                recalibration table.  Default is 0xF04" << std::endl;
+    std::cerr << "\t                                recalibration table" << std::endl;
     std::cerr << "\t--applyExcludeFlags <flag>    : do not apply the recalibration table to any reads with any of these flags set" << std::endl;
     mySqueeze.binningUsage();
 }
@@ -387,11 +386,6 @@ bool Recab::processReadBuildTable(SamRecord& samRecord)
     {
         // Secondary read
         ++mySecondaryCount;
-    }
-    if(flag & SamFlag::SUPPLEMENTARY_ALIGNMENT)
-    {
-        // Supplementary read
-        ++mySupplementaryCount;
     }
     if(SamFlag::isDuplicate(flag))
     {
@@ -794,7 +788,6 @@ void Recab::modelFitPrediction(const char* outputBase)
     Logger::gLogger->writeLog("# mapped Reads observed: %ld", myMappedCount);
     Logger::gLogger->writeLog("# unmapped Reads observed: %ld", myUnMappedCount);
     Logger::gLogger->writeLog("# Secondary Reads observed: %ld", mySecondaryCount);
-    Logger::gLogger->writeLog("# Supplementary Reads observed: %ld", mySupplementaryCount);
     Logger::gLogger->writeLog("# Duplicate Reads observed: %ld", myDupCount);
     Logger::gLogger->writeLog("# QC Failure Reads observed: %ld", myQCFailCount);
     Logger::gLogger->writeLog("# Mapping Quality 0 Reads skipped: %ld", myMapQual0Count);
