@@ -4,3 +4,5 @@ test/testFilesLibBam
 *~
 *.tgz
 .idea
+*.bk
+cmake-build-debug

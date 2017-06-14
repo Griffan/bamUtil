@@ -69,7 +69,7 @@ int ExternalMemorySortManager::FindAllBeginPointer() {
 		sortHeap.push_back(tmpHeap);
 	}else if (bedFile == "") {//create segments on the fly
 		SamFileHeader tmpHeader;
-//		SamFile fin(bamFile.c_str(), SamFile::READ, &tmpHeader);
+		SamFile fin(bamFile.c_str(), SamFile::READ, &tmpHeader);
 		int nSQ = tmpHeader.getNumSQs();
 		std::string chrName;
 		int seqLength(0);
